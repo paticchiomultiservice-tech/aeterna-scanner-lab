@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AETERNA Scanner LAB™</title>
+
+<meta name="theme-color" content="#0a0a0a">
+
+<link rel="icon" type="image/png" href="./nuovologo.png">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:
+radial-gradient(circle at top,#1a1a1a 0%,#080808 45%,#000000 100%);
+color:white;
+overflow-x:hidden;
+padding:25px;
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+margin-bottom:60px;
+}
+
+.logo{
+width:140px;
+height:140px;
+margin:auto;
+border-radius:35px;
+overflow:hidden;
+border:2px solid #d4af37;
+box-shadow:
+0 0 20px rgba(212,175,55,0.4),
+0 0 50px rgba(212,175,55,0.15);
+background:#111;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:30px;
+}
+
+.logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.title{
+font-size:58px;
+font-weight:bold;
+color:#d4af37;
+margin-bottom:15px;
+letter-spacing:1px;
+}
+
+.subtitle{
+max-width:850px;
+margin:auto;
+font-size:18px;
+line-height:1.9;
+color:#b3b3b3;
+}
+
+.badge{
+display:inline-block;
+margin-top:25px;
+padding:12px 22px;
+background:#d4af37;
+color:black;
+font-size:12px;
+font-weight:bold;
+border-radius:40px;
+letter-spacing:1px;
+}
+
+/* GRID */
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:25px;
+margin-top:50px;
+}
+
+.card{
+background:rgba(15,15,15,0.97);
+border:1px solid rgba(212,175,55,0.18);
+border-radius:28px;
+padding:30px;
+backdrop-filter:blur(10px);
+box-shadow:
+0 0 30px rgba(0,0,0,0.35);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#d4af37;
+}
+
+.card h2{
+color:#d4af37;
+margin-bottom:18px;
+font-size:25px;
+}
+
+.card p{
+color:#a7a7a7;
+line-height:1.8;
+margin-bottom:20px;
+font-size:15px;
+}
+
+/* INPUT */
+
+input[type="text"]{
+width:100%;
+padding:16px;
+border:none;
+border-radius:16px;
+background:#090909;
+color:white;
+font-size:15px;
+outline:none;
+margin-bottom:15px;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+input[type="file"]{
+margin-top:15px;
+color:#bbb;
+font-size:14px;
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+padding:17px;
+border:none;
+border-radius:16px;
+background:#d4af37;
+color:black;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+margin-top:18px;
+}
+
+button:hover{
+transform:scale(1.02);
+background:#f2ca63;
+}
+
+/* IMAGE */
+
+.preview{
+width:100%;
+margin-top:20px;
+border-radius:20px;
+display:none;
+border:1px solid rgba(212,175,55,0.15);
+}
+
+/* RESULT */
+
+.result{
+margin-top:35px;
+padding:25px;
+border-radius:20px;
+display:none;
+line-height:1.8;
+font-size:15px;
+}
+
+.safe{
+background:#12351d;
+border:1px solid #38c96b;
+}
+
+.warning{
+background:#3b2d13;
+border:1px solid #ffcc00;
+}
+
+.danger{
+background:#3b1212;
+border:1px solid #ff4d4d;
+}
+
+/* SCORE */
+
+.score-section{
+margin-top:50px;
+}
+
+.score-box{
+background:#111;
+border-radius:28px;
+padding:35px;
+border:1px solid rgba(212,175,55,0.15);
+text-align:center;
+}
+
+.score-title{
+color:#d4af37;
+font-size:28px;
+margin-bottom:15px;
+}
+
+.score{
+font-size:70px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.progress{
+height:20px;
+background:#222;
+border-radius:30px;
+overflow:hidden;
+margin-top:25px;
+}
+
+.progress-bar{
+height:100%;
+width:18%;
+background:#d4af37;
+transition:1s;
+}
+
+/* STATUS */
+
+.status-grid{
+margin-top:45px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.status-box{
+background:#111;
+padding:22px;
+border-radius:22px;
+border:1px solid rgba(212,175,55,0.15);
+text-align:center;
+}
+
+.status-box h3{
+color:#d4af37;
+margin-bottom:12px;
+font-size:18px;
+}
+
+.status-box span{
+font-size:14px;
+color:#aaa;
+line-height:1.6;
+}
+
+/* LOGS */
+
+.logs{
+margin-top:50px;
+background:#111;
+padding:35px;
+border-radius:28px;
+border:1px solid rgba(212,175,55,0.15);
+}
+
+.logs h2{
+color:#d4af37;
+margin-bottom:25px;
+}
+
+.log-entry{
+padding:14px;
+border-bottom:1px solid rgba(255,255,255,0.05);
+color:#aaa;
+font-size:14px;
+line-height:1.7;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:70px;
+text-align:center;
+padding-bottom:40px;
+}
+
+.footer-title{
+color:#d4af37;
+font-size:16px;
+margin-bottom:15px;
+}
+
+.footer-text{
+font-size:12px;
+color:#777;
+line-height:1.9;
+max-width:900px;
+margin:auto;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+padding:18px;
+}
+
+.title{
+font-size:40px;
+}
+
+.subtitle{
+font-size:16px;
+}
+
+.score{
+font-size:52px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="logo">
+<img src="./nuovologo.png">
+</div>
+
+<div class="title">
+AETERNA Scanner LAB™
+</div>
+
+<div class="subtitle">
+
+Internal Cognitive Security Environment™<br><br>
+
+Laboratorio evolutivo dedicato
+alla simulazione di minacce digitali,
+analisi URL sospetti,
+rilevazione QR phishing,
+controllo immagini,
+simulazione pattern malevoli
+e sviluppo delle future tecnologie AETERNA™.
+
+</div>
+
+<div class="badge">
+AETERNA™ INTERNAL INFRASTRUCTURE
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div class="dashboard">
+
+<!-- URL -->
+
+<div class="card">
+
+<h2>Scanner URL</h2>
+
+<p>
+Analizza collegamenti sospetti,
+redirect nascosti,
+tracking link
+e possibili tentativi di phishing.
+</p>
+
+<input type="text"
+id="urlInput"
+placeholder="https://example.com">
+
+<button onclick="analyzeURL()">
+AVVIA ANALISI URL
+</button>
+
+</div>
+
+<!-- IMAGE -->
+
+<div class="card">
+
+<h2>Scanner Immagini & QR</h2>
+
+<p>
+Carica screenshot,
+QR code,
+email sospette
+o contenuti potenzialmente malevoli.
+</p>
+
+<input type="file"
+id="imageInput"
+accept="image/*">
+
+<img id="preview"
+class="preview">
+
+<button onclick="analyzeImage()">
+ANALIZZA IMMAGINE
+</button>
+
+</div>
+
+<!-- EMAIL -->
+
+<div class="card">
+
+<h2>Email Threat Check</h2>
+
+<p>
+Simula verifica contenuti email,
+messaggi sospetti,
+social scam
+e tentativi di manipolazione.
+</p>
+
+<input type="text"
+id="emailInput"
+placeholder="Inserisci testo o mittente sospetto">
+
+<button onclick="analyzeEmail()">
+ANALIZZA CONTENUTO
+</button>
+
+</div>
+
+</div>
+
+<!-- RESULT -->
+
+<div id="resultBox" class="result"></div>
+
+<!-- SCORE -->
+
+<div class="score-section">
+
+<div class="score-box">
+
+<div class="score-title">
+Threat Score™
+</div>
+
+<div class="score"
+id="scoreValue">
+18%
+</div>
+
+<div class="progress">
+
+<div class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- STATUS -->
+
+<div class="status-grid">
+
+<div class="status-box">
+<h3>Threat Detection</h3>
+<span>AI Simulation Active</span>
+</div>
+
+<div class="status-box">
+<h3>Guardian Shield™</h3>
+<span>Operational Defense Layer</span>
+</div>
+
+<div class="status-box">
+<h3>Cognitive Defense</h3>
+<span>Manipulation Pattern Detection</span>
+</div>
+
+<div class="status-box">
+<h3>Internal Protocol™</h3>
+<span>AETERNA™ Secure Environment</span>
+</div>
+
+</div>
+
+<!-- LOGS -->
+
+<div class="logs">
+
+<h2>System Logs</h2>
+
+<div id="logContainer">
+
+<div class="log-entry">
+[AETERNA™] Scanner environment initialized successfully.
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<div class="footer-title">
+AETERNA™ Digital Continuity Infrastructure
+</div>
+
+<div class="footer-text">
+
+Questo strumento fornisce esclusivamente simulazioni,
+valutazioni indicative e pareri informativi
+basati su logiche euristiche e comportamentali.
+I risultati non costituiscono certificazione tecnica,
+garanzia assoluta di sicurezza,
+consulenza legale,
+forense o cybersecurity professionale.
+L’utilizzo della piattaforma avviene sotto responsabilità dell’utente.
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const imageInput=document.getElementById("imageInput");
+const preview=document.getElementById("preview");
+
+imageInput.addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(file){
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+preview.src=e.target.result;
+preview.style.display="block";
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+function updateScore(value){
+
+document.getElementById("scoreValue").innerText=value+"%";
+document.getElementById("progressBar").style.width=value+"%";
+
+}
+
+function addLog(text){
+
+const log=document.createElement("div");
+
+log.className="log-entry";
+
+log.innerHTML="[AETERNA™] "+text;
+
+document.getElementById("logContainer").prepend(log);
+
+}
+
+function showResult(type,title,text){
+
+const resultBox=document.getElementById("resultBox");
+
+resultBox.style.display="block";
+resultBox.className="result "+type;
+
+resultBox.innerHTML=`
+<h3>${title}</h3>
+<br>
+<p>${text}</p>
+`;
+
+}
+
+/* URL ANALYSIS */
+
+function analyzeURL(){
+
+const url=document.getElementById("urlInput").value;
+
+if(url===""){
+
+showResult(
+"warning",
+"⚠ Nessun URL inserito",
+"Inserisci un collegamento valido."
+);
+
+updateScore(35);
+
+addLog("URL analysis failed — empty field.");
+
+return;
+
+}
+
+if(
+url.includes("bit.ly") ||
+url.includes("grabify") ||
+url.includes("tinyurl") ||
+url.includes("verify-login") ||
+url.includes("free-money") ||
+url.includes("gift-card")
+){
+
+showResult(
+"danger",
+"🚨 RISCHIO ELEVATO",
+`
+La simulazione ha rilevato indicatori compatibili con:
+<br><br>
+✔ phishing
+<br>
+✔ redirect nascosto
+<br>
+✔ dominio sospetto
+`
+);
+
+updateScore(91);
+
+addLog("High-risk URL detected.");
+
+}else{
+
+showResult(
+"safe",
+"✅ ANALISI COMPLETATA",
+`
+Nessun indicatore critico rilevato
+nella simulazione iniziale.
+<br><br>
+✔ dominio apparentemente regolare
+<br>
+✔ struttura coerente
+`
+);
+
+updateScore(22);
+
+addLog("Safe URL simulation completed.");
+
+}
+
+}
+
+/* IMAGE ANALYSIS */
+
+function analyzeImage(){
+
+if(!imageInput.files[0]){
+
+showResult(
+"warning",
+"⚠ Nessuna immagine caricata",
+"Carica screenshot o QR code."
+);
+
+updateScore(42);
+
+addLog("Image analysis failed — no file uploaded.");
+
+return;
+
+}
+
+const randomResult=Math.floor(Math.random()*3);
+
+if(randomResult===0){
+
+showResult(
+"safe",
+"✅ ANALISI VISIVA COMPLETATA",
+`
+Nessun elemento critico evidente rilevato.
+<br><br>
+✔ struttura coerente
+<br>
+✔ nessun QR sospetto
+`
+);
+
+updateScore(20);
+
+addLog("Visual scan completed — no threat detected.");
+
+}
+
+if(randomResult===1){
+
+showResult(
+"warning",
+"⚠ ATTENZIONE",
+`
+Possibili elementi sospetti individuati.
+<br><br>
+✔ verificare URL presenti
+<br>
+✔ controllare mittente
+<br>
+✔ analizzare QR
+`
+);
+
+updateScore(58);
+
+addLog("Potential suspicious visual pattern detected.");
+
+}
+
+if(randomResult===2){
+
+showResult(
+"danger",
+"🚨 POSSIBILE RISCHIO RILEVATO",
+`
+Pattern compatibili con:
+<br><br>
+✔ phishing
+<br>
+✔ manipolazione grafica
+<br>
+✔ QR potenzialmente malevolo
+`
+);
+
+updateScore(93);
+
+addLog("Critical visual threat simulation triggered.");
+
+}
+
+}
+
+/* EMAIL ANALYSIS */
+
+function analyzeEmail(){
+
+const email=document.getElementById("emailInput").value.toLowerCase();
+
+if(email===""){
+
+showResult(
+"warning",
+"⚠ Nessun contenuto inserito",
+"Inserisci testo o mittente sospetto."
+);
+
+updateScore(38);
+
+addLog("Email analysis failed — empty content.");
+
+return;
+
+}
+
+if(
+email.includes("urgente") ||
+email.includes("clicca qui") ||
+email.includes("password") ||
+email.includes("bitcoin") ||
+email.includes("verifica account")
+){
+
+showResult(
+"danger",
+"🚨 POSSIBILE SOCIAL ENGINEERING",
+`
+Il contenuto contiene pattern
+compatibili con:
+<br><br>
+✔ phishing emotivo
+<br>
+✔ manipolazione psicologica
+<br>
+✔ richiesta dati sensibili
+`
+);
+
+updateScore(89);
+
+addLog("Potential social engineering pattern detected.");
+
+}else{
+
+showResult(
+"safe",
+"✅ CONTENUTO ANALIZZATO",
+`
+Nessun indicatore critico evidente rilevato.
+`
+);
+
+updateScore(25);
+
+addLog("Email content simulation completed.");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
