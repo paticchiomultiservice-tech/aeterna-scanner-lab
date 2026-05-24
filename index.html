@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AETERNA Scanner LAB™</title>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+background:#050505;
+font-family:Arial,sans-serif;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:700px;
+background:#111;
+border:1px solid #d4af37;
+border-radius:25px;
+padding:40px;
+box-shadow:0 0 25px rgba(212,175,55,0.3);
+text-align:center;
+}
+
+.logo{
+font-size:38px;
+font-weight:bold;
+color:#d4af37;
+margin-bottom:10px;
+}
+
+.subtitle{
+font-size:16px;
+color:#999;
+margin-bottom:40px;
+}
+
+.box{
+background:#1b1b1b;
+padding:25px;
+border-radius:18px;
+margin-bottom:25px;
+border:1px solid rgba(212,175,55,0.2);
+}
+
+input{
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+background:#0d0d0d;
+color:white;
+font-size:15px;
+outline:none;
+margin-top:15px;
+}
+
+button{
+margin-top:20px;
+padding:16px 25px;
+background:#d4af37;
+color:black;
+font-weight:bold;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.03);
+background:#f1c75b;
+}
+
+.result{
+margin-top:30px;
+padding:20px;
+border-radius:15px;
+display:none;
+font-size:15px;
+line-height:1.6;
+}
+
+.safe{
+background:#12351d;
+border:1px solid #3bc96f;
+}
+
+.warning{
+background:#3a2a10;
+border:1px solid #ffcc00;
+}
+
+.danger{
+background:#3b1212;
+border:1px solid #ff4d4d;
+}
+
+.footer{
+margin-top:35px;
+font-size:13px;
+color:#777;
+}
+
+.badge{
+margin-top:10px;
+display:inline-block;
+padding:8px 15px;
+background:#d4af37;
+color:black;
+border-radius:30px;
+font-size:12px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">AETERNA Scanner LAB™</div>
+
+<div class="subtitle">
+Laboratorio Interno • Analisi URL • Test Ambiente Privato
+</div>
+
+<div class="box">
+
+<h2>Scanner URL Interno</h2>
+
+<p>
+Inserisci un link da analizzare.
+</p>
+
+<input type="text" id="urlInput" placeholder="https://example.com">
+
+<button onclick="analyzeURL()">
+AVVIA ANALISI
+</button>
+
+<div id="resultBox" class="result"></div>
+
+</div>
+
+<div class="badge">
+AETERNA™ Internal Environment
+</div>
+
+<div class="footer">
+Sistema interno di sviluppo e simulazione.
+</div>
+
+</div>
+
+<script>
+
+function analyzeURL(){
+
+const url = document.getElementById("urlInput").value;
+const resultBox = document.getElementById("resultBox");
+
+resultBox.style.display = "block";
+
+if(url === ""){
+
+resultBox.className = "result warning";
+
+resultBox.innerHTML = `
+<h3>⚠ Nessun URL inserito</h3>
+<p>Inserisci un link valido per procedere con la simulazione.</p>
+`;
+
+return;
+
+}
+
+if(
+url.includes("bit.ly") ||
+url.includes("tinyurl") ||
+url.includes("grabify") ||
+url.includes("free-money") ||
+url.includes("login-verification")
+){
+
+resultBox.className = "result danger";
+
+resultBox.innerHTML = `
+<h3>🚨 RISCHIO ELEVATO</h3>
+<p>
+Il collegamento contiene indicatori potenzialmente sospetti.
+</p>
+
+<p>
+Consigliato:
+<br>
+✔ evitare apertura
+<br>
+✔ verificare dominio
+<br>
+✔ procedere con analisi avanzata
+</p>
+`;
+
+}else{
+
+resultBox.className = "result safe";
+
+resultBox.innerHTML = `
+<h3>✅ ANALISI COMPLETATA</h3>
+
+<p>
+Nessun indicatore critico rilevato nella simulazione iniziale.
+</p>
+
+<p>
+Il dominio sembra strutturalmente regolare.
+</p>
+`;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
